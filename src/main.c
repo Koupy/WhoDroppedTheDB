@@ -1,11 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-
+#include "../include/whoDroppedTheDB.h"
 
 int main(int argc,char **argv){
-  
-  return 0;
-  
+
+	displayMenu();
+	return 0;
+
 }
