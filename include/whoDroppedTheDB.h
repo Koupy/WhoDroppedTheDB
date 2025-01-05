@@ -16,12 +16,20 @@ typedef struct {
 	char surname[50];
 		} Customer;
 
-// Account strcture
+// Account structure
 typedef struct {
 	size_t accountNumber;
 	size_t customerID;
 	double balance;
 	char accountType[20];
 		} Account;
+
+// Customer accounts structure
+typedef struct {
+	Customer customer;
+	Account *accounts;
+	size_t accountCount;
+		} CustomerDB;
+
 
 #endif
