@@ -11,9 +11,17 @@ void displayMenu();
 
 // Customer structure
 typedef struct {
-	size_t customerID
-	char name[50]
-	char surname[50]
+	size_t customerID;
+	char name[50];
+	char surname[50];
 		} Customer;
+
+// Account strcture
+typedef struct {
+	size_t accountNumber;
+	size_t customerID;
+	double balance;
+	char accountType[20];
+		} Account;
 
 #endif
