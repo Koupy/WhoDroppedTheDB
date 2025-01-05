@@ -6,15 +6,12 @@
 #include <stdbool.h>
 #include <string.h>
 
-//functions
-void displayMenu();
-
 // Customer structure
 typedef struct {
 	size_t customerID;
 	char name[50];
 	char surname[50];
-		} Customer;
+           	} Customer;
 
 // Account structure
 typedef struct {
@@ -26,10 +23,14 @@ typedef struct {
 
 // Customer accounts structure
 typedef struct {
-	Customer customer;
+	Customer *customers;
+	size_t customerCount;
 	Account *accounts;
 	size_t accountCount;
 		} CustomerDB;
 
+//functions
+void displayMenu();
+CustomerDB *startDB();
 
 #endif
