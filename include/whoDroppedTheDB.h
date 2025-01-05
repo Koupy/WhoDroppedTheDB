@@ -6,6 +6,14 @@
 #include <stdbool.h>
 #include <string.h>
 
+//functions
 void displayMenu();
+
+// Customer structure
+typedef struct {
+	size_t customerID
+	char name[50]
+	char surname[50]
+		} Customer;
 
 #endif
