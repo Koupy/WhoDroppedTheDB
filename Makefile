@@ -1,19 +1,21 @@
 # Compiler
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -I../include
 
 # Source files
-SOURCES = src/main.c src/userInteraction.c src/repl.c src/btree.c
+SOURCES = src/main.c src/userInteraction.c src/repl.c src/btree.c src/db.c
 TARGET = bin/pacificStandard
 
 # Default Target
-all:
+all: $(TARGET)
+
+$(TARGET): $(SOURCES)
 	$(CC) $(CFLAGS) -o bin/pacificStandard $(SOURCES)
 
 # Run the program
 run: $(TARGET)
-	./$(TARGET)
+	./$<
 
 # Clean up
 clean:
-	rm -f main
+	rm -f $(TARGET)
