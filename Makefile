@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -g -I../include
 
 # Source files
-SOURCES = src/main.c src/userInteraction.c src/repl.c src/btree.c src/db.c
+SOURCES = src/main.c src/userInteraction.c src/repl.c src/btree.c src/db.c src/customerDbInteraction.c
 TARGET = bin/pacificStandard
 
 # Default Target
