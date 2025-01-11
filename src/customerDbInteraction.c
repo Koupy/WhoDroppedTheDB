@@ -30,3 +30,20 @@ void registerCustomer(CustomerDB *db) {
 	printf("Registering ...\n");
 	printf("Success ! %s %s has been added !\n", lastName, firstName);
 }
+
+void viewCustomers(CustomerDB *db) {
+	if (!db || db->customerCount == 0) {
+		printf("No Customers in the DB\n");
+		return;
+	}
+
+	printf("*** Registered Customers ***\n");
+
+	for (size_t i = 0; i < db->customerCount; i++) {
+		Customer *customer = &db->customers[i];
+		printf("- %s %s (ID : %zu)\n", customer->surname, customer->name, customer->customerID);
+		printf("     ----     \n");
+	}
+}
+
+

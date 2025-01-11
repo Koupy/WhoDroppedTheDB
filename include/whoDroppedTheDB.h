@@ -38,5 +38,6 @@ void freeDB(CustomerDB *db);
 
 // Database Customer Interaction
 void registerCustomer(CustomerDB *db);
+void viewCustomers(CustomerDB *db);
 
 #endif
