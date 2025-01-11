@@ -62,7 +62,7 @@ void selectCustomer(CustomerDB *db) {
 	for (size_t i = 0; i < db->customerCount; i++) {
 		if (db->customers[i].customerID == customerID) {
                 	printf("- %s %s (ID : %zu)\n", db->customers[i].surname, db->customers[i].name, db->customers[i].customerID);
-			printf("Soon you will see customer bank account\n");
+			selectCustomerMenu(db, i);
 			return;
 		}
 	}
@@ -70,12 +70,37 @@ void selectCustomer(CustomerDB *db) {
 }
 
 
+void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
+	Customer *customer = &db->customers[customerIndex];
+	size_t choice;
 
+	while (1) {
+		printf("\n *** Actions available ***\n");
+		printf("1. Update Customer\n");
+        	printf("2. Delete Customer\n");
+		printf("3. Exit\n");
+		printf("Your choice : \n");
+		scanf("%zu", &choice);
 
+		switch (choice) {
+			case 1 :
+				//updateCustomer(customer);
+				return;
 
+			case 2 :
+				//deleteCustomer(db, customerIndex);
+				return;
 
+			case 3 :
+				printf("Soon you will see customer bank account\n");
+				return;
 
+			default :
+				printf("Please try again\n");
 
+		}
+	}
+}
 
 
 
