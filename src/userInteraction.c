@@ -1,6 +1,6 @@
 #include "../include/whoDroppedTheDB.h"
 
-void displayMenu() {
+void displayMenu(CustomerDB *db) {
 	size_t choice;
 
 	while(1) {
@@ -26,8 +26,8 @@ void displayMenu() {
 				}
 
                 	case 3: {
-				printf("Exiting...");
-                        	exit(0);
+                        	freeDB(db);
+				exit(0);
                         	}
 
                 	default:

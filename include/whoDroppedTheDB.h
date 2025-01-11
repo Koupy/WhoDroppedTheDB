@@ -29,8 +29,11 @@ typedef struct {
 	size_t accountCount;
 		} CustomerDB;
 
-//functions
-void displayMenu();
+// Menu Functions
+void displayMenu(CustomerDB *db);
+
+// Database Functions
 CustomerDB *startDB();
+void freeDB(CustomerDB *db);
 
 #endif
