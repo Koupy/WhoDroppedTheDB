@@ -47,3 +47,36 @@ void viewCustomers(CustomerDB *db) {
 }
 
 
+void selectCustomer(CustomerDB *db) {
+	if (!db || db->customerCount == 0) {
+		printf("No Customers in the DB\n");
+		return;
+	}
+
+	viewCustomers(db);
+
+	size_t customerID;
+	printf("Enter a customer ID : \n");
+	scanf("%zu", &customerID);
+
+	for (size_t i = 0; i < db->customerCount; i++) {
+		if (db->customers[i].customerID == customerID) {
+                	printf("- %s %s (ID : %zu)\n", db->customers[i].surname, db->customers[i].name, db->customers[i].customerID);
+			printf("Soon you will see customer bank account\n");
+			return;
+		}
+	}
+	printf("No customers with ID %zu\n", customerID);
+}
+
+
+
+
+
+
+
+
+
+
+
+

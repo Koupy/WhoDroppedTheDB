@@ -8,6 +8,7 @@ void displayMenu(CustomerDB *db) {
 		printf(" -- CUSTOMER -- \n");
 		printf("1. Register a New Customer \n");
 		printf("2. View All customers\n");
+		printf("3. Select a customer");
         	printf("\n -- ACCOUNT -- \n");
 		printf("2. Open a New Account\n");
 		printf("3. Exiting\n");
@@ -27,7 +28,13 @@ void displayMenu(CustomerDB *db) {
 				break;
 				}
 
-                	case 3: {
+			case 3: {
+				printf("\n");
+				selectCustomer(db);
+				break;
+				}
+
+                	case 4: {
 				printf("\n");
                         	freeDB(db);
 				exit(0);
