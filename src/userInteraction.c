@@ -15,8 +15,7 @@ void displayMenu(CustomerDB *db) {
 
         	switch (choice) {
                 	case 1: {
-                        	printf("Soon...");
-				//TODO
+				registerCustomer(db);
 				break;
                         	}
 

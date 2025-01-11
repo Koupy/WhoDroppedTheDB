@@ -36,4 +36,7 @@ void displayMenu(CustomerDB *db);
 CustomerDB *startDB();
 void freeDB(CustomerDB *db);
 
+// Database Customer Interaction
+void registerCustomer(CustomerDB *db);
+
 #endif
