@@ -3,6 +3,7 @@
 
 # Executables
 bin/
+*.dat
 
 # Object files
 *.o
