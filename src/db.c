@@ -43,8 +43,45 @@ void saveDB(CustomerDB *db, char *filename) {
 	}
 
 	fclose(file);
-	printf("Database saved to '%s'\n", filename); 
+	printf("Database saved to '%s'\n", filename);
 }
+
+CustomerDB  *loadDB(char *filename) {
+	FILE *file = fopen(filename, "rb");
+
+	// Create a new DB if no DB already
+	if (!file) {
+		printf("No previous DB...\n");
+		return startDB();
+	}
+
+	// Try to allocate memory for the DB
+	CustomerDB *db = (CustomerDB *)malloc(sizeof(CustomerDB));
+    	if (!db) {
+        	printf("Memory allocation failed while loading database.\n");
+        	fclose(file);
+        	exit(1);
+    	}
+
+	// Read the number of customers
+	fread(&db->customerCount, sizeof(size_t), 1, file);
+
+	// Allocate memory for customers
+	db->customers = (Customer *)malloc(db->customerCount * sizeof(Customer));
+	if (!db->customers) {
+		printf("Failed to allocate memory for customers !\n");
+		fclose(file);
+		exit(1);
+	}
+
+	// Read all customers
+	fread(db->customers, sizeof(Customer), db->customerCount, file);
+
+	fclose(file);
+	printf("Senior has restored the DB\n");
+	return db;
+}
+
 
 
 
