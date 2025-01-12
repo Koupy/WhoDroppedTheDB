@@ -56,7 +56,7 @@ void selectCustomer(CustomerDB *db) {
 	viewCustomers(db);
 
 	size_t customerID;
-	printf("Enter a customer ID : \n");
+	printf("Enter a customer ID : ");
 	scanf("%zu", &customerID);
 
 	for (size_t i = 0; i < db->customerCount; i++) {
@@ -66,7 +66,7 @@ void selectCustomer(CustomerDB *db) {
 			return;
 		}
 	}
-	printf("No customers with ID %zu\n", customerID);
+	printf("\nNo customers with ID %zu\n", customerID);
 }
 
 
@@ -75,16 +75,16 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 	size_t choice;
 
 	while (1) {
-		printf("\n *** Actions available ***\n");
+		printf("\n\n *** Actions available ***\n");
 		printf("1. Update Customer\n");
         	printf("2. Delete Customer\n");
 		printf("3. Exit\n");
-		printf("Your choice : \n");
+		printf("Your choice : ");
 		scanf("%zu", &choice);
 
 		switch (choice) {
 			case 1 :
-				//updateCustomer(customer);
+				updateCustomer(customer);
 				return;
 
 			case 2 :
@@ -92,15 +92,52 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 				return;
 
 			case 3 :
-				printf("Soon you will see customer bank account\n");
+				printf("\nSoon you will see customer bank account\n");
 				return;
 
 			default :
-				printf("Please try again\n");
+				printf("\nPlease try again\n");
 
 		}
 	}
 }
+
+
+
+
+void updateCustomer(Customer *customer){
+	char firstName[50];
+	char lastName[50];
+
+	printf("\n*** Updating Customer ***\n");
+	printf("Enter new First Name : ");
+    	scanf(" %[^\n]", firstName);
+
+	if (strlen(firstName) > 0) {
+        strncpy(customer->name, firstName, sizeof(customer->name) - 1);
+        customer->name[sizeof(customer->name) - 1] = '\0';
+	}
+
+	printf("\nEnter new Last Name : ");
+    	scanf(" %[^\n]", lastName);
+
+	if (strlen(lastName) > 0) {
+        strncpy(customer->surname, lastName, sizeof(customer->surname) - 1);
+        customer->surname[sizeof(customer->surname) - 1] = '\0';
+    	}
+
+	printf("\nCustomer updated !\n");
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

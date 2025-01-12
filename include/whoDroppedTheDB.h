@@ -41,5 +41,6 @@ void registerCustomer(CustomerDB *db);
 void viewCustomers(CustomerDB *db);
 void selectCustomer(CustomerDB *db);
 void selectCustomerMenu(CustomerDB *db, size_t customerIndex);
+void updateCustomer(Customer *customer);
 
 #endif
