@@ -39,7 +39,7 @@ void displayMenu(CustomerDB *db) {
 				printf("\n");
 				saveDB(db, filename);
                         	freeDB(db);
-				break;
+				exit(0);
                         	}
 
                 	default:
