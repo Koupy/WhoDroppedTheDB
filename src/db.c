@@ -21,22 +21,44 @@ void freeDB(CustomerDB *db) {
 		return;
 	}
 
-	printf("Freeing DB...\n");
-
-	if (db->customers) {
-		for(size_t i = 0; i < db->customerCount; i++) {
-			printf("Freeing customer %zu\n ...", i);
-		}
-
 		free(db->customers);
 		db->customers = NULL;
-		printf("All customers freed !\n");
-	}
 
 	free(db);
-	db = NULL;
 	printf("/!\\ Database has been dropped by the intern /!\\\n");
 }
+
+
+void saveDB(CustomerDB *db, char *filename) {
+	FILE *file = fopen(filename, "wb");
+	if (!file) {
+		printf("Unable to open file");
+		return;
+	}
+
+	fwrite(&db->customerCount, sizeof(size_t), 1, file);
+
+	for (size_t i = 0; i < db->customerCount; i++) {
+		fwrite(&db->customers[i], sizeof(Customer), 1, file);
+	}
+
+	fclose(file);
+	printf("Database saved to '%s'\n", filename); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

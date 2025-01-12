@@ -1,6 +1,7 @@
 #include "../include/whoDroppedTheDB.h"
 
 void displayMenu(CustomerDB *db) {
+	char *filename = "pacificaStandard.dat";
 	size_t choice;
 
 	while(1) {
@@ -11,7 +12,7 @@ void displayMenu(CustomerDB *db) {
 		printf("3. Select a customer");
         	printf("\n -- ACCOUNT -- \n");
 		printf("2. Open a New Account\n");
-		printf("3. Exiting\n");
+		printf("4. Exiting\n");
         	printf("\nEnter your choice: ");
         	scanf("%zu", &choice);
 
@@ -36,8 +37,9 @@ void displayMenu(CustomerDB *db) {
 
                 	case 4: {
 				printf("\n");
+				saveDB(db, filename);
                         	freeDB(db);
-				exit(0);
+				break;
                         	}
 
                 	default:
