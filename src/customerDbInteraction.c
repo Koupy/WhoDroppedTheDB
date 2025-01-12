@@ -88,7 +88,7 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 				return;
 
 			case 2 :
-				//deleteCustomer(db, customerIndex);
+				deleteCustomer(db, customerIndex);
 				return;
 
 			case 3 :
@@ -97,7 +97,7 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 
 			default :
 				printf("\nPlease try again\n");
-
+				break;
 		}
 	}
 }
@@ -130,7 +130,29 @@ void updateCustomer(Customer *customer){
 }
 
 
+void deleteCustomer(CustomerDB *db, size_t customerIndex) {
+	if(!db || db->customerCount == 0 || customerIndex >= db->customerCount) {
+		printf("Invalid index \n");
+		return;
+	}
 
+	printf("\n*** Deleting Customer ***\n");
+	printf("Customer has been deleted !\n");
+
+	//Moving existing users in DB
+	for (size_t i = customerIndex; i < db->customerCount - 1; i++) {
+		db->customers[i] = db->customers[i + 1];
+	}
+
+	db->customerCount--;
+
+	//Resizing thz array
+	db->customers = (Customer *)realloc(db->customers, db->customerCount * sizeof(Customer));
+	if (db->customerCount > 0 && !db->customers) {
+		printf("Reallocation Failed\n");
+		exit(1);
+	}
+}
 
 
 
