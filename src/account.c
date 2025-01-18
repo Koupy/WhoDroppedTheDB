@@ -1,12 +1,15 @@
 #include "../include/whoDroppedTheDB.h"
 
-void openAccount(CustomerDB *db) {
+void dbErrorCheck(CustomerDB *db) {
 	// Check if db or customers available
 	if (!db || db->customerCount == 0) {
-		printf("No customer available\n");
-		return;
-	}
+                printf("No customer available\n");
+                return;
+	 }
+}
 
+void openAccount(CustomerDB *db) {
+	//dbErrorCheck(db);
 	viewCustomers(db);
 
 	size_t customerID;
@@ -56,13 +59,46 @@ void openAccount(CustomerDB *db) {
     	printf("Account created ! Account Number: %zu\n", newAccount->accountNumber);
 }
 
+void viewCustomerAccounts(CustomerDB *db) {
+	// Display user list
+	viewCustomers(db);
+
+	size_t customerID;
+    	printf("Enter the Customer ID : ");
+    	scanf("%zu", &customerID);
+
+	// Check if the customer exists
+    	Customer *customer = NULL;
+    	for (size_t i = 0; i < db->customerCount; i++) {
+        	if (db->customers[i].customerID == customerID) {
+            		customer = &db->customers[i];
+            		break;
+       		 }
+    	}
 
 
+	if (!customer) {
+        	printf("Customer not found\n");
+        	return;
+    	}
 
+	// Display Accounts
+	printf("\n--- Accounts for %s %s (Customer ID: %zu) ---\n",customer->name, customer->surname, customerID);
+    	bool hasAccounts = false;
+    	for (size_t i = 0; i < db->accountCount; i++) {
+        	if (db->accounts[i].customerID == customerID) {
+            	hasAccounts = true;
+            	printf("Account Number: %zu\n", db->accounts[i].accountNumber);
+            	printf("Account Type: %s\n", db->accounts[i].accountType);
+            	printf("Balance: %.2f\n", db->accounts[i].balance);
+            	printf("----------------------------\n");
+        	}
+    	}
 
-
-
-
+	if (!hasAccounts) {
+        	printf("No accounts found for this customer.\n");
+    	}
+}
 
 
 

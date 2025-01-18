@@ -6,10 +6,10 @@ void displayMenu(CustomerDB *db) {
 
 	while(1) {
         	printf("\n--- PACIFIC STANDARD ---\n");
-		printf(" -- CUSTOMER -- \n");
+		printf("\n -- CUSTOMER -- \n");
 		printf("1. Register a New Customer \n");
 		printf("2. View All customers\n");
-		printf("3. Select a customer");
+		printf("3. Select a customer\n");
         	printf("\n -- ACCOUNT -- \n");
 		printf("4. Open a New Account\n");
 		printf("5. Select an account\n");
@@ -42,6 +42,12 @@ void displayMenu(CustomerDB *db) {
 			case 4: {
 				printf("\n");
 				openAccount(db);
+				break;
+				}
+
+			case 5: {
+				printf("\n");
+				viewCustomerAccounts(db);
 				break;
 				}
 

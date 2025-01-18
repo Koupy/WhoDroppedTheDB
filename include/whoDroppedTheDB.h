@@ -48,6 +48,8 @@ void updateCustomer(Customer *customer);
 void deleteCustomer(CustomerDB *db, size_t customerIndex);
 
 // Account Functions
+void dbErrorCheck(CustomerDB *db);
 void openAccount(CustomerDB *db);
+void viewCustomerAccounts(CustomerDB *db);
 
 #endif
