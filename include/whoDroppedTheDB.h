@@ -36,6 +36,7 @@ void displayMenu(CustomerDB *db);
 CustomerDB *startDB();
 void freeDB(CustomerDB *db);
 void saveDB(CustomerDB *db, char *filename);
+void deleteDbFile(char * filename);
 CustomerDB *loadDB(char *filename);
 
 // Database Customer Interaction
