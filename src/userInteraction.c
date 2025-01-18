@@ -11,8 +11,12 @@ void displayMenu(CustomerDB *db) {
 		printf("2. View All customers\n");
 		printf("3. Select a customer");
         	printf("\n -- ACCOUNT -- \n");
-		printf("2. Open a New Account\n");
-		printf("4. Exiting\n");
+		printf("4. Open a New Account\n");
+		printf("5. Select an account\n");
+		printf("6. See all accounts\n");
+		printf("\n -- OTHER --\n");
+		printf("7. Drop the DB\n");
+		printf("8. Exit\n");
         	printf("\nEnter your choice: ");
         	scanf("%zu", &choice);
 
@@ -35,12 +39,20 @@ void displayMenu(CustomerDB *db) {
 				break;
 				}
 
-                	case 4: {
+			case 7: {
+				//Next feature : automatic deletion without leaving the program
 				printf("\n");
-				saveDB(db, filename);
-                        	freeDB(db);
+				dropDbFile(filename);
+				freeDB(db);
 				exit(0);
-                        	}
+				}
+
+			 case 8: {
+                                printf("\n");
+                                saveDB(db, filename);
+                                freeDB(db);
+                                exit(0);
+                                }
 
                 	default:
                         	printf("\nPlease try again\n");

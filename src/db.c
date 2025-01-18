@@ -82,7 +82,12 @@ CustomerDB  *loadDB(char *filename) {
 	return db;
 }
 
-
+void dropDbFile(char *filename) {
+	if(remove(filename) == 0)
+		printf("DB file has been targeted by the intern\n");
+	else
+		printf("Error deleting file\n");
+}
 
 
 
