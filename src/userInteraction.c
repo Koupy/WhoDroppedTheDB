@@ -39,6 +39,12 @@ void displayMenu(CustomerDB *db) {
 				break;
 				}
 
+			case 4: {
+				printf("\n");
+				openAccount(db);
+				break;
+				}
+
 			case 7: {
 				//Next feature : automatic deletion without leaving the program
 				printf("\n");

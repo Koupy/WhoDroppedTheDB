@@ -47,4 +47,7 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex);
 void updateCustomer(Customer *customer);
 void deleteCustomer(CustomerDB *db, size_t customerIndex);
 
+// Account Functions
+void openAccount(CustomerDB *db);
+
 #endif
