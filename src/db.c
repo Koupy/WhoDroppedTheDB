@@ -42,6 +42,12 @@ void saveDB(CustomerDB *db, char *filename) {
 		fwrite(&db->customers[i], sizeof(Customer), 1, file);
 	}
 
+    	fwrite(&db->accountCount, sizeof(size_t), 1, file);
+
+   	for (size_t i = 0; i < db->accountCount; i++) {
+        	fwrite(&db->accounts[i], sizeof(Account), 1, file);
+    	}
+
 	fclose(file);
 	printf("Database saved to '%s'\n", filename);
 }
@@ -66,20 +72,37 @@ CustomerDB  *loadDB(char *filename) {
 	// Read the number of customers
 	fread(&db->customerCount, sizeof(size_t), 1, file);
 
-	// Allocate memory for customers
-	db->customers = (Customer *)malloc(db->customerCount * sizeof(Customer));
-	if (!db->customers) {
-		printf("Failed to allocate memory for customers !\n");
-		fclose(file);
-		exit(1);
-	}
+    	// Allocate memory for customers
+    	db->customers = (Customer *)malloc(db->customerCount * sizeof(Customer));
+    	if (!db->customers) {
+        	printf("Failed to allocate memory for customers!\n");
+        	free(db);
+        	fclose(file);
+        	exit(1);
+    	}
 
-	// Read all customers
-	fread(db->customers, sizeof(Customer), db->customerCount, file);
+    	// Read all customers
+    	fread(db->customers, sizeof(Customer), db->customerCount, file);
 
-	fclose(file);
-	printf("Senior has restored the DB\n");
-	return db;
+    	// Read the number of accounts
+    	fread(&db->accountCount, sizeof(size_t), 1, file);
+
+    	// Allocate memory for accounts
+    	db->accounts = (Account *)malloc(db->accountCount * sizeof(Account));
+    	if (!db->accounts) {
+        	printf("Failed to allocate memory for accounts!\n");
+        	free(db->customers);
+        	free(db);
+        	fclose(file);
+       		exit(1);
+    	}
+
+    	// Read all accounts
+    	fread(db->accounts, sizeof(Account), db->accountCount, file);
+
+    	fclose(file);
+   	 printf("Senior has restored the DB\n");
+    	return db;
 }
 
 void dropDbFile(char *filename) {

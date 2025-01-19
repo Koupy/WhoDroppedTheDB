@@ -1,9 +1,9 @@
 #include "../include/whoDroppedTheDB.h"
 
 void dbErrorCheck(CustomerDB *db) {
-	// Check if db or customers available
-	if (!db || db->customerCount == 0) {
-                printf("No customer available\n");
+	// Check if account is available
+	if (!db || db->accountCount == 0) {
+                printf("No accounts available\n");
                 return;
 	 }
 }
@@ -100,13 +100,35 @@ void viewCustomerAccounts(CustomerDB *db) {
     	}
 }
 
+void viewAllAccounts(CustomerDB *db) {
+	if (!db || db->accountCount == 0) {
+        	printf("\nNo accounts available.\n");
+        	return;
+    	}
 
+    	printf("\n--- All Accounts ---\n");
+    	for (size_t i = 0; i < db->accountCount; i++) {
+        	Account *account = &db->accounts[i];
+        	Customer *owner = NULL;
 
+        // Find the account owner
+        for (size_t j = 0; j < db->customerCount; j++) {
+            if (db->customers[j].customerID == account->customerID) {
+                owner = &db->customers[j];
+                break; // Stop searching once the owner is found
+            }
+        }
 
-
-
-
-
-
-
-
+        // Display account details
+        printf("Account Number: %zu\n", account->accountNumber);
+        printf("Account Type: %s\n", account->accountType);
+        printf("Balance: %.2f\n", account->balance);
+        if (owner) {
+            printf("Account Owner: %s %s (Customer ID: %zu)\n",
+                   owner->name, owner->surname, owner->customerID);
+        } else {
+            printf("Account Owner: Unknown (Customer ID: %zu)\n", account->customerID);
+        }
+        printf("----------------------------\n");
+    }
+}

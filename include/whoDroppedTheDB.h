@@ -51,5 +51,6 @@ void deleteCustomer(CustomerDB *db, size_t customerIndex);
 void dbErrorCheck(CustomerDB *db);
 void openAccount(CustomerDB *db);
 void viewCustomerAccounts(CustomerDB *db);
+void viewAllAccounts(CustomerDB *db);
 
 #endif
