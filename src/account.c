@@ -1,15 +1,16 @@
 #include "../include/whoDroppedTheDB.h"
 
+// Check if minimum one account is available
 void dbErrorCheck(CustomerDB *db) {
-	// Check if account is available
 	if (!db || db->accountCount == 0) {
                 printf("No accounts available\n");
                 return;
 	 }
 }
 
+// Open an account and link it to a selected customer
 void openAccount(CustomerDB *db) {
-	//dbErrorCheck(db);
+	// Display list of customes
 	viewCustomers(db);
 
 	size_t customerID;
@@ -47,6 +48,7 @@ void openAccount(CustomerDB *db) {
         	return;
     	}
 
+	// DB allocation
     	Account *newAccount = &db->accounts[db->accountCount];
     	newAccount->accountNumber = db->accountCount + 1; // Generate a unique account number
     	newAccount->customerID = customerID;
@@ -59,6 +61,7 @@ void openAccount(CustomerDB *db) {
     	printf("Account created ! Account Number: %zu\n", newAccount->accountNumber);
 }
 
+// See accounts of a selected customer
 void viewCustomerAccounts(CustomerDB *db) {
 	// Display user list
 	viewCustomers(db);
@@ -100,12 +103,15 @@ void viewCustomerAccounts(CustomerDB *db) {
     	}
 }
 
+// Display the list of all accounts for all customers
 void viewAllAccounts(CustomerDB *db) {
+	// Account avaibility check
 	if (!db || db->accountCount == 0) {
         	printf("\nNo accounts available.\n");
         	return;
     	}
 
+	// Account display
     	printf("\n--- All Accounts ---\n");
     	for (size_t i = 0; i < db->accountCount; i++) {
         	Account *account = &db->accounts[i];

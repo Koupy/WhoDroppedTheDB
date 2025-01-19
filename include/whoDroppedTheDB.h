@@ -30,7 +30,7 @@ typedef struct {
 		} CustomerDB;
 
 // Menu Functions
-void displayMenu(CustomerDB *db);
+void displayMenu(CustomerDB *db, char *filename);
 
 // Database Functions
 CustomerDB *startDB();

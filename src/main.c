@@ -6,8 +6,8 @@ int main(int argc,char **argv){
 	// Load a database if exist
 	CustomerDB *db = loadDB(filename);
 
-	// Payload
-	displayMenu(db);
+	// User payload
+	displayMenu(db, filename);
 
 	return 0;
 

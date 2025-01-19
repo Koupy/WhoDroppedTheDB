@@ -1,7 +1,7 @@
 #include "../include/whoDroppedTheDB.h"
 
-void displayMenu(CustomerDB *db) {
-	char *filename = "pacificaStandard.dat";
+// Display all the available actions to the user
+void displayMenu(CustomerDB *db, char *filename) {
 	size_t choice;
 
 	while(1) {
@@ -58,7 +58,6 @@ void displayMenu(CustomerDB *db) {
 				}
 
 			case 7: {
-				//Next feature : automatic deletion without leaving the program
 				printf("\n");
 				dropDbFile(filename);
 				freeDB(db);

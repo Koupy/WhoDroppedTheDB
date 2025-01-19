@@ -1,6 +1,8 @@
 #include "../include/whoDroppedTheDB.h"
 
+// Add a new customer in the DB
 void registerCustomer(CustomerDB *db) {
+	// Check if a database is created
 	if (!db) {
 		printf("No DB\n");
 		return;
@@ -15,12 +17,14 @@ void registerCustomer(CustomerDB *db) {
 	printf("Enter Last Name: ");
     	scanf("%s", lastName);
 
+	// Resize the previous malloc function from startDB() to welcome then new customer 
 	db->customers = (Customer *)realloc(db->customers, (db->customerCount + 1) * sizeof(Customer));
 	if (!db->customers) {
 		printf("Failed");
 		exit(1);
 	}
 
+	// Copy data into the customer table
 	Customer *newCustomer = &db->customers[db->customerCount];
 	newCustomer->customerID = db->customerCount + 1;
 	strncpy(newCustomer->name, firstName, sizeof(newCustomer->name) - 1);
@@ -31,7 +35,9 @@ void registerCustomer(CustomerDB *db) {
 	printf("Success ! %s %s has been added !\n", lastName, firstName);
 }
 
+// Display all the available customrs
 void viewCustomers(CustomerDB *db) {
+	// Check if one user minimum is available
 	if (!db || db->customerCount == 0) {
 		printf("No Customers in the DB\n");
 		return;
@@ -39,6 +45,7 @@ void viewCustomers(CustomerDB *db) {
 
 	printf("*** Registered Customers ***\n");
 
+	// Display all found customers
 	for (size_t i = 0; i < db->customerCount; i++) {
 		Customer *customer = &db->customers[i];
 		printf("- %s %s (ID : %zu)\n", customer->surname, customer->name, customer->customerID);
@@ -46,19 +53,22 @@ void viewCustomers(CustomerDB *db) {
 	}
 }
 
-
+// Displat only selected customers
 void selectCustomer(CustomerDB *db) {
+	// Check if one user minimum is available
 	if (!db || db->customerCount == 0) {
 		printf("No Customers in the DB\n");
 		return;
 	}
 
+	// Display the customer list
 	viewCustomers(db);
 
 	size_t customerID;
 	printf("Enter a customer ID : ");
 	scanf("%zu", &customerID);
 
+	// Display data of the current customer
 	for (size_t i = 0; i < db->customerCount; i++) {
 		if (db->customers[i].customerID == customerID) {
                 	printf("- %s %s (ID : %zu)\n", db->customers[i].surname, db->customers[i].name, db->customers[i].customerID);
@@ -69,7 +79,7 @@ void selectCustomer(CustomerDB *db) {
 	printf("\nNo customers with ID %zu\n", customerID);
 }
 
-
+// Add action menu for user management
 void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 	Customer *customer = &db->customers[customerIndex];
 	size_t choice;
@@ -92,6 +102,7 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 				return;
 
 			case 3 :
+				// TODO
 				printf("\nSoon you will see customer bank account\n");
 				return;
 
@@ -102,9 +113,7 @@ void selectCustomerMenu(CustomerDB *db, size_t customerIndex) {
 	}
 }
 
-
-
-
+// Modifity the informations of a selected customer
 void updateCustomer(Customer *customer){
 	char firstName[50];
 	char lastName[50];
@@ -113,6 +122,7 @@ void updateCustomer(Customer *customer){
 	printf("Enter new First Name : ");
     	scanf(" %[^\n]", firstName);
 
+	// Overwrite current data for the new ones ('\0' useful for avoiding string overwriting
 	if (strlen(firstName) > 0) {
         strncpy(customer->name, firstName, sizeof(customer->name) - 1);
         customer->name[sizeof(customer->name) - 1] = '\0';
@@ -129,8 +139,9 @@ void updateCustomer(Customer *customer){
 	printf("\nCustomer updated !\n");
 }
 
-
+// Delete customer from the databse
 void deleteCustomer(CustomerDB *db, size_t customerIndex) {
+	// Check if number from the index existe
 	if(!db || db->customerCount == 0 || customerIndex >= db->customerCount) {
 		printf("Invalid index \n");
 		return;
@@ -153,14 +164,3 @@ void deleteCustomer(CustomerDB *db, size_t customerIndex) {
 		exit(1);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

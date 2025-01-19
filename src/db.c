@@ -1,20 +1,24 @@
 #include "../include/whoDroppedTheDB.h"
 
+// Create a new DB
 CustomerDB *startDB() {
 	printf("Initializing DB\n");
 
+	// Check if memory allocation has failed
 	CustomerDB *db = (CustomerDB *)malloc(sizeof(CustomerDB));
 	if (!db) {
 		printf("Failed to allocate memory\n");
 		exit(1);
 		 }
 
+	// Initialize DB to null values
 	db->customers = NULL;
 	db->customerCount = 0;
 	printf("DB Initialized: customers=%p, customerCount=%zu\n", db->customers, db->customerCount);
 	return db;
 }
 
+// Erase all the data saved in the DB
 void freeDB(CustomerDB *db) {
 	if (!db) {
 		printf("No DB !\n");
@@ -28,7 +32,7 @@ void freeDB(CustomerDB *db) {
 	printf("/!\\ Database has been dropped by the intern /!\\\n");
 }
 
-
+// Save the current data into a file (name and directory defined in main.c)
 void saveDB(CustomerDB *db, char *filename) {
 	FILE *file = fopen(filename, "wb");
 	if (!file) {
@@ -36,12 +40,14 @@ void saveDB(CustomerDB *db, char *filename) {
 		return;
 	}
 
+	// Copy all customer data in the file
 	fwrite(&db->customerCount, sizeof(size_t), 1, file);
 
 	for (size_t i = 0; i < db->customerCount; i++) {
 		fwrite(&db->customers[i], sizeof(Customer), 1, file);
 	}
 
+	// Copy all account data in the file
     	fwrite(&db->accountCount, sizeof(size_t), 1, file);
 
    	for (size_t i = 0; i < db->accountCount; i++) {
@@ -52,6 +58,7 @@ void saveDB(CustomerDB *db, char *filename) {
 	printf("Database saved to '%s'\n", filename);
 }
 
+// Open the saved file and copy all the data in a new database (create a new DB if no file exist)
 CustomerDB  *loadDB(char *filename) {
 	FILE *file = fopen(filename, "rb");
 
@@ -105,25 +112,10 @@ CustomerDB  *loadDB(char *filename) {
     	return db;
 }
 
+// Delete the database file
 void dropDbFile(char *filename) {
 	if(remove(filename) == 0)
 		printf("DB file has been targeted by the intern\n");
 	else
 		printf("Error deleting file\n");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
